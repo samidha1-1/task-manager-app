@@ -12,7 +12,7 @@ app.secret_key = "3aa7b16253eb2885c5ad6d5cf89dfbd02507335701bb2b3140ea319eb0a391
 
 def get_db_connection():
     return mysql.connector.connect(
-        host="localhost",
+        host="mysql",
         user="root",
         password="root",
         database="task_manager"
