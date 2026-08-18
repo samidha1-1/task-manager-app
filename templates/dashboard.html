@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <h1>My Tasks</h1>
+
+            <p>
+                Organize your work and stay productive.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="add-task-card">
+
+        <h2>Add New Task</h2>
+
+        <form
+            method="POST"
+            action="{{ url_for('add_task') }}"
+        >
+
+            <input
+                type="text"
+                name="title"
+                placeholder="Task title"
+                required
+            >
+
+            <textarea
+                name="description"
+                placeholder="Task description"
+            ></textarea>
+
+            <button type="submit">
+                Add Task
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <div class="task-list">
+
+        {% if tasks %}
+
+            {% for task in tasks %}
+
+            <div class="task-card
+                {% if task.completed %}
+                    completed
+                {% endif %}
+            ">
+
+                <div class="task-content">
+
+                    <h3>
+                        {{ task.title }}
+                    </h3>
+
+                    <p>
+                        {{ task.description }}
+                    </p>
+
+                    {% if task.completed %}
+
+                        <span class="status completed-status">
+                            Completed
+                        </span>
+
+                    {% else %}
+
+                        <span class="status pending-status">
+                            Pending
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="task-actions">
+
+                    {% if not task.completed %}
+
+                    <a
+                        href="{{ url_for(
+                            'complete_task',
+                            task_id=task.id
+                        ) }}"
+                        class="complete"
+                    >
+                        Complete
+                    </a>
+
+                    {% endif %}
+
+                    <a
+                        href="{{ url_for(
+                            'delete_task',
+                            task_id=task.id
+                        ) }}"
+                        class="delete"
+                        onclick="return confirm('Delete this task?')"
+                    >
+                        Delete
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty">
+
+                <h2>No tasks yet</h2>
+
+                <p>
+                    Add your first task above.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}
