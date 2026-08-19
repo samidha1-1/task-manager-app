@@ -13,7 +13,7 @@ app.secret_key = "3aa7b16253eb2885c5ad6d5cf89dfbd02507335701bb2b3140ea319eb0a391
 
 def get_db_connection():
     return mysql.connector.connect(
-        host=os.getenv("DB_HOST", "localhost"),
+        host=os.getenv("DB_HOST", "mysql"),
         port=int(os.getenv("DB_PORT", "3306")),
         user=os.getenv("DB_USER", "taskuser"),
         password=os.getenv("DB_PASSWORD", "taskpass"),
