@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import mysql.connector
+import os
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
@@ -10,12 +11,15 @@ app.secret_key = "3aa7b16253eb2885c5ad6d5cf89dfbd02507335701bb2b3140ea319eb0a391
 # MySQL Connection
 # -------------------------
 
+import os
+
 def get_db_connection():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="root",
-        database="task_manager"
+        host=os.getenv("DB_HOST", "localhost"),
+        port=int(os.getenv("DB_PORT", "3307")),
+        user=os.getenv("DB_USER", "root"),
+        password=os.getenv("DB_PASSWORD", "root123"),
+        database=os.getenv("DB_NAME", "task_manager")
     )
 
 
@@ -258,4 +262,4 @@ def logout():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)

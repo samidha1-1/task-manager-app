@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+       DB_HOST: db
+       DB_PORT: 3306
+       DB_USER: taskuser
+       DB_PASSWORD: taskpass
+       DB_NAME: task_manager
+
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+       MYSQL_ROOT_PASSWORD: root123
+       MYSQL_DATABASE: task_manager
+       MYSQL_USER: taskuser
+       MYSQL_PASSWORD: taskpass
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql   
+
+networks:
+  default:
+    name: task-manager-network
+
+volumes:
+   mysql_data:
+      name: mysql_data
