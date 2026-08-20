@@ -26,6 +26,7 @@ def create_tables():
     """)
 
     db.commit()
-
     cursor.close()
     db.close()
+
+    print("Database tables created successfully.")
