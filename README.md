@@ -26,6 +26,29 @@ This project demonstrates application development, database integration, contain
 
 ---
 
+# Screenshots
+
+## Registration Page 
+
+![Registration Page](screenshots/registration-page.png)
+
+
+## Login Page 
+
+![Login Page](screenshots/login=page.png)
+
+
+## Dashboard Page 
+
+![Dashboard Page](screenshots/dashboard-page.png)
+
+
+## Task Added Page 
+
+![Task Added Page](screenshots/task-added-page.png)
+
+---
+
 ## 🛠️ Tech Stack
 
 | Category | Technology |
